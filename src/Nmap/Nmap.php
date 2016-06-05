@@ -80,6 +80,9 @@ class Nmap
 
         $options = array();
 
+        // Allow root execution
+        $options[] = '--privileged';
+
         // Nmap uses TCP as default (-sS)
         if ($this->scanProtocol === 'all') {
             $options[] = '-sS -sU';
@@ -139,7 +142,7 @@ class Nmap
     public function setScanProtocol($protocol)
     {
         $this->scanProtocol = $protocol;
-        
+
         return $this;
     }
 
