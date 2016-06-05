@@ -23,6 +23,8 @@ class Nmap
 
     private $outputFile;
 
+    private $scanProtocol;
+
     private $enableOsDetection = false;
 
     private $enableServiceInfo = false;
@@ -77,6 +79,16 @@ class Nmap
         }, $targets));
 
         $options = array();
+
+        // Nmap uses TCP as default (-sS)
+        if ($this->scanProtocol === 'all') {
+            $options[] = '-sS -sU';
+        } else if ($this->scanProtocol === 'udp') {
+            $options[] = '-sU';
+        } else if ($this->scanProtocol === 'tcp') {
+            $options[] = '-sS';
+        }
+
         if (true === $this->enableOsDetection) {
             $options[] = '-O';
         }
@@ -118,6 +130,17 @@ class Nmap
         }
 
         return $this->parseOutputFile($this->outputFile);
+    }
+
+    /**
+     * @param string $protocol
+     * @return Nmap
+     */
+    public function setScanProtocol($protocol)
+    {
+        $this->scanProtocol = $protocol;
+        
+        return $this;
     }
 
     /**
