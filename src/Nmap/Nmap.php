@@ -54,7 +54,7 @@ class Nmap
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct(ProcessExecutor $executor = null, $outputFile = null, $executable = 'nmap')
+    public function __construct(ProcessExecutor $executor = null, $outputFile = null, $executable = 'sudo nmap')
     {
         $this->executor   = $executor ?: new ProcessExecutor();
         $this->outputFile = $outputFile ?: sys_get_temp_dir() . '/output.xml';
@@ -79,9 +79,6 @@ class Nmap
         }, $targets));
 
         $options = array();
-
-        // Allow root execution
-        $options[] = '--privileged';
 
         // Nmap uses TCP as default (-sS)
         if ($this->scanProtocol === 'all') {
