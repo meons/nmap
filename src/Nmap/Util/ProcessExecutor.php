@@ -25,6 +25,8 @@ class ProcessExecutor
     public function execute($command)
     {
         $process = new Process($command);
+        $process->setTimeout(600);
+        $process->setIdleTimeout(600);
         $process->run();
 
         if (!$process->isSuccessful()) {
