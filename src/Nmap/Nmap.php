@@ -249,16 +249,17 @@ class Nmap
     private function parsePorts(\SimpleXMLElement $xmlPorts)
     {
         $ports = array();
+        // If service info is not enabled dont parse service in xml
         foreach ($xmlPorts as $port) {
             $ports[] = new Port(
                 (string) $port->attributes()->portid,
                 (string) $port->attributes()->protocol,
                 (string) $port->state->attributes()->state,
-                new Service(
+                $this->enableServiceInfo ? new Service(
                     (string) $port->service->attributes()->name,
                     (string) $port->service->attributes()->product,
                     (string) $port->service->attributes()->version
-                )
+                ) : new Service(null, null, null)
             );
         }
 
