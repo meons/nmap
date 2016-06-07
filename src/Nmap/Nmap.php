@@ -225,7 +225,8 @@ class Nmap
                 (string) $host->address->attributes()->addr,
                 (string) $host->status->attributes()->state,
                 isset($host->hostnames) ? $this->parseHostnames($host->hostnames->hostname) : array(),
-                isset($host->ports) ? $this->parsePorts($host->ports->port) : array()
+                isset($host->ports) ? $this->parsePorts($host->ports->port) : array(),
+                (string) $host->os->osmatch->attributes()->name
             );
         }
 

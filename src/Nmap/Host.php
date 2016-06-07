@@ -27,12 +27,15 @@ class Host
 
     private $ports;
 
-    public function __construct($address, $state, array $hostnames = array(), array $ports = array())
+    private $os;
+
+    public function __construct($address, $state, array $hostnames = array(), array $ports = array(), $os)
     {
         $this->address   = $address;
         $this->state     = $state;
         $this->hostnames = $hostnames;
         $this->ports     = $ports;
+        $this->os        = $os;
     }
 
     /**
@@ -65,6 +68,14 @@ class Host
     public function getPorts()
     {
         return $this->ports;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOs()
+    {
+        return $this->os;
     }
 
     /**
