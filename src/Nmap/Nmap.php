@@ -259,7 +259,7 @@ class Nmap
                     (string) $port->service->attributes()->name,
                     (string) $port->service->attributes()->product,
                     (string) $port->service->attributes()->version
-                ) : new Service(null, null, null)
+                ) : new Service()
             );
         }
 
